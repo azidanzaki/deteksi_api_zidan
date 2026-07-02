@@ -1,6 +1,8 @@
 import torch
 
-# Monkey-patch torch.load untuk kompatibilitas checkpoint lama
+# ==========================
+# Patch torch.load (kompatibilitas YOLO lama)
+# ==========================
 _original_torch_load = torch.load
 
 def _patched_load(*args, **kwargs):
@@ -9,22 +11,30 @@ def _patched_load(*args, **kwargs):
 
 torch.load = _patched_load
 
+
 from pathlib import Path
-from ultralytics import YOLO
 import cv2
 import numpy as np
 
 # ==========================
-# Load model
+# Model Lazy Loading (PENTING UNTUK RENDER)
 # ==========================
-from pathlib import Path
+from ultralytics import YOLO
 
 BASE_DIR = Path(__file__).resolve().parent
 MODEL_PATH = BASE_DIR / "best.pt"
-model = YOLO(str(MODEL_PATH))
+
+model = None  # jangan load saat import (anti crash)
+
+def get_model():
+    global model
+    if model is None:
+        model = YOLO(str(MODEL_PATH))
+    return model
+
 
 # ==========================
-# Cache agar hasil video stabil
+# Cache stabilizer (optional)
 # ==========================
 _last_detection = []
 _lost_frame = 0
@@ -35,6 +45,8 @@ MAX_LOST_FRAME = 5
 # Detect Image
 # ==========================
 def detect_fire_image(image_path: str):
+
+    model = get_model()
 
     results = model.predict(
         source=image_path,
@@ -47,7 +59,6 @@ def detect_fire_image(image_path: str):
     detections = []
 
     for result in results:
-
         for box in result.boxes:
 
             det = {
@@ -57,7 +68,7 @@ def detect_fire_image(image_path: str):
                 "label": model.names[int(box.cls)]
             }
 
-            # Filter smoke yang terlalu kecil
+            # Filter smoke kecil
             if det["class_id"] == 1:
                 x1, y1, x2, y2 = det["bbox"]
                 area = (x2 - x1) * (y2 - y1)
@@ -80,16 +91,9 @@ def annotate_frame(frame: np.ndarray, detections):
         x1, y1, x2, y2 = map(int, det["bbox"])
 
         label = f"{det['label'].capitalize()} {det['confidence']:.2f}"
-
         color = (0, 0, 255)
 
-        cv2.rectangle(
-            frame,
-            (x1, y1),
-            (x2, y2),
-            color,
-            2
-        )
+        cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
 
         cv2.putText(
             frame,
@@ -109,8 +113,9 @@ def annotate_frame(frame: np.ndarray, detections):
 # ==========================
 def detect_fire_frame(frame: np.ndarray):
 
-    global _last_detection
-    global _lost_frame
+    global _last_detection, _lost_frame
+
+    model = get_model()
 
     rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
@@ -118,14 +123,13 @@ def detect_fire_frame(frame: np.ndarray):
         source=rgb,
         conf=0.25,
         iou=0.45,
-        imgsz=960,
+        imgsz=640,   # WAJIB 640 untuk Render
         verbose=False
     )
 
     detections = []
 
     for result in results:
-
         for box in result.boxes:
 
             det = {
@@ -135,9 +139,8 @@ def detect_fire_frame(frame: np.ndarray):
                 "label": model.names[int(box.cls)]
             }
 
-            # Filter smoke yang terlalu kecil
+            # filter smoke kecil
             if det["class_id"] == 1:
-
                 x1, y1, x2, y2 = det["bbox"]
                 area = (x2 - x1) * (y2 - y1)
 
@@ -150,12 +153,9 @@ def detect_fire_frame(frame: np.ndarray):
     # Stabilizer (anti flicker)
     # ==========================
     if len(detections) > 0:
-
         _last_detection = detections
         _lost_frame = 0
-
     else:
-
         if _lost_frame < MAX_LOST_FRAME:
             detections = _last_detection
             _lost_frame += 1
