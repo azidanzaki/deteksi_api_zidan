@@ -1,0 +1,420 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <!--====== Title ======-->
+    <title>TraveLand - Tour and Travel Agency Template</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS -->
+    <link rel="shortcut icon" href="static/assets/images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="static/assets/css/animate.css">
+    <link rel="stylesheet" href="static/assets/css/nice-select.css">
+    <link rel="stylesheet" href="static/assets/css/LineIcons.2.0.css">
+    <link rel="stylesheet" href="static/assets/css/bootstrap.4.5.2.min.css">
+    <link rel="stylesheet" href="static/assets/css/default.css">
+    <link rel="stylesheet" href="static/assets/css/style.css">
+</head>
+
+<body>
+    <!-- LOADING OVERLAY -->
+    <div id="loading" style="
+    position: fixed;
+    inset: 0;
+    background: rgba(255,255,255,0.75);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    flex-direction: column;
+">
+        <div style="
+        width: 50px;
+        height: 50px;
+        border: 5px solid #eee;
+        border-top: 5px solid #fff93d;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    ">
+        </div>
+        <p style="margin-top:10px; font-weight:bold; color:#000000;">
+            Mendeteksi gambar...
+        </p>
+    </div>
+
+    <!--====== PRELOADER PART START ======-->
+    <div class="preloader">
+        <div class="loader">
+            <div class="ytp-spinner">
+                <div class="ytp-spinner-container">
+                    <div class="ytp-spinner-rotator">
+                        <div class="ytp-spinner-left">
+                            <div class="ytp-spinner-circle"></div>
+                        </div>
+                        <div class="ytp-spinner-right">
+                            <div class="ytp-spinner-circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--====== PRELOADER PART ENDS ======-->
+
+    <!--====== HEADER PART START ======-->
+    <section class="header_area">
+        <div class="header_navbar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand" href="index.html">
+                                <img src="{{ url_for('static', filename='assets/images/logofire1.png') }}" alt="Logo"
+                                    style="width:50%; height:auto;">
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                <ul id="nav" class="navbar-nav ml-auto">
+                                    <li class="nav-item active">
+                                        <a class="page-scroll" href="#home">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="page-scroll" href="#about">About</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="page-scroll" href="#deteksi">Detection</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="page-scroll" href="#image">Image</a>
+                                    </li>
+                                </ul>
+                            </div> <!-- navbar collapse -->
+                        </nav> <!-- navbar -->
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+        </div> <!-- header navbar -->
+        <div id="home" class="header_slider">
+            <div class="single_slider bg_cover d-flex align-items-center"
+                style="background-image: url(static/assets/images/bg_kebakaran1.jpg)">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-8">
+                            <div class="slider_content">
+                                <h2 class="slider_title wow fadeInLeftBig" data-wow-duration="1.3s"
+                                    data-wow-delay="0.2s">Deteksi Kebakaran<span> dan Asap Hutan</span></h2>
+                                <p class="wow fadeInLeftBig" data-wow-duration="1.3s" data-wow-delay="0.5s">Deteksi
+                                    kebakaran dan asap hutan secara realtime menggunakan algoritma yolo</p>
+                                <a href="javascript:void(0)" class="main-btn wow fadeInLeftBig" data-wow-duration="1.3s"
+                                    data-wow-delay="0.8s">Deteksi Sekarang</a>
+                            </div> <!-- slider content -->
+                        </div>
+                    </div> <!-- row -->
+                </div> <!-- container -->
+            </div> <!-- single slider -->
+        </div> <!-- header slider -->
+    </section>
+    <!--====== HEADER PART ENDS ======-->
+
+    <!--====== ABOUT PART START ======-->
+    <section id="about" class="about_area pt-130 pb-130">
+        <div class="about_wrapper">
+            <div class="about_image bg_cover" style="background-image: url(static/assets/images/about_fire.jpg)"></div>
+            <!-- about image -->
+            <div class="container">
+                <div class="row justify-content-end">
+                    <div class="col-lg-6">
+                        <div class="about_content">
+                            <div class="section_title">
+                                <h3 class="title">Tentang <br><span> Kebakaran Hutan</span></h3>
+                                <p>Kebakaran merupakan bencana yang sering terjadi dan berdampak pada kerusakan
+                                    lingkungan, pencemaran udara, serta kesehatan. Pemantauan secara manual memiliki
+                                    keterbatasan dalam kecepatan dan jangkauan. Dengan perkembangan AI dan Computer
+                                    Vision, deteksi kebakaran dan asap kini dapat dilakukan secara otomatis menggunakan
+                                    deep learning, salah satunya YOLOv8 yang dikenal cepat dan akurat untuk deteksi
+                                    objek pada gambar maupun video real-time.</p>
+                            </div> <!-- section title -->
+                        </div> <!-- about content -->
+                        <div class="about_counter d-flex flex-wrap">
+                            <div class="single_counter counter_1 d-flex justify-content-center align-items-center wow fadeInUpBig"
+                                data-wow-duration="1.3s" data-wow-delay="0.2s">
+                                <div class="counter_wrapper">
+                                    <span class="counter">376.000</span> Ha
+                                    <p>Luas Karhutla 2024</p>
+                                </div> <!-- single wrapper -->
+                            </div> <!-- single counter -->
+
+                            <div class="single_counter counter_2 d-flex justify-content-center align-items-center wow fadeInUpBig"
+                                data-wow-duration="1.3s" data-wow-delay="0.5s">
+                                <div class="counter_wrapper">
+                                    <span class="counter">629</span>
+                                    <p>Kejadian Karhutla</p>
+                                </div> <!-- single wrapper -->
+                            </div> <!-- single counter -->
+
+                            <div class="single_counter counter_2 d-flex justify-content-center align-items-center wow fadeInUpBig"
+                                data-wow-duration="1.3s" data-wow-delay="0.8s">
+                                <div class="counter_wrapper">
+                                    <span class="counter">5.62</span> Juta Ha
+                                    <p>Area Terbakar (2019–2024)</p>
+                                </div> <!-- single wrapper -->
+                            </div> <!-- single counter -->
+
+                            <div class="single_counter counter_1 d-flex justify-content-center align-items-center wow fadeInUpBig"
+                                data-wow-duration="1.3s" data-wow-delay="1.1s">
+                                <div class="counter_wrapper">
+                                    <span class="counter">42</span> %
+                                    <p>Karhutla Berasal dari NTT & NTB (2024)</p>
+                                </div> <!-- single wrapper -->
+                            </div> <!-- single counter -->
+                        </div> <!-- about_counter -->
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+        </div> <!-- about wrapper -->
+    </section>
+    <!--====== ABOUT PART ENDS ======-->
+
+    <!--====== Deteksi PART START ======-->
+    <section id="deteksi" class="destination_area pt-130 pb-130">
+        <div class="section_title text-center pb-25">
+            <h3 class="title">Deteksi Kebakaran dan Asap Hutan </h3>
+            <p>Mulai deteksi kebakaran dan asap hutan dengan klik tombol deteksi dibawah ini</p></br>
+            <a href="/camera" target="_blank" rel="nofollow" class="main-btn">Deteksi</a>
+
+        </div> <!-- section title -->
+    </section>
+    <!--====== Deteksi PART ENDS ======-->
+
+    <!--====== Image PART START ======-->
+    <section id="image-section" class="team_area pt-120 pb-130">
+
+        <div class="section_title text-center pb-25">
+            <h3 class="title">Image Detection</h3>
+            <p>Deteksi juga bisa dilakukan dengan menggunakan gambar, upload gambar lalu lihat hasil deteksi di bawah
+            </p>
+        </div>
+
+        <!-- CENTER WRAPPER -->
+        <div style="display:flex; justify-content:center; align-items:center; padding:20px;">
+
+            <!-- CARD -->
+            <div style="
+            width:100%;
+            max-width:600px;
+            padding:35px;
+            border-radius:18px;
+            background:linear-gradient(145deg,#ffffff,#f7f7f7);
+            box-shadow:0 20px 50px rgba(0,0,0,0.12);
+            text-align:center;
+            transition:0.3s ease;
+        ">
+
+                <p style="font-size:14px; color:#666; margin-bottom:20px;">
+                    pilih gambar untuk memulai mendeteksi api atau asap hutan
+                </p>
+
+                <form id="upload-form" enctype="multipart/form-data">
+
+                    <!-- DROP ZONE -->
+                    <div id="drop-zone" style="
+                    position:relative;
+                    padding:30px 15px;
+                    border:2px dashed #d0d0d0;
+                    border-radius:12px;
+                    background:#fafafa;
+                    cursor:pointer;
+                    transition:0.3s;
+                    margin-bottom:20px;
+                ">
+
+                        <span id="file-label" style="font-size:14px; color:#555;">
+                            Pilih atau seret gambar ke sini
+                        </span>
+
+                        <input type="file" name="image" id="imageInput" accept="image/*"
+                            style="position:absolute; inset:0; opacity:0; cursor:pointer;">
+                    </div>
+
+                    <!-- BUTTON DIGANTI LINK -->
+                    <button type="submit" class="main-btn">
+                        Deteksi
+                    </button>
+
+                </form>
+
+                <div id="preview" style="margin-top:15px;"></div>
+
+            </div>
+        </div>
+
+    </section>
+    <!--====== Image PART ENDS ======-->
+
+    <!--====== FOOTER PART START ======-->
+    <section id="footer" class="footer_area">
+        <div class="footer_widget pt-80 pb-130">
+
+            <div class="container" style="max-width: 900px; margin: 0 auto; display: flex; justify-content: center;">
+
+                <div class="row" style="width: 100%; justify-content: center;">
+
+                    <div class="col-lg-4 col-md-6 order-md-1 order-lg-1">
+                        <div class="footer_about mt-50">
+                            <a href="#">
+                                <img src="{{ url_for('static', filename='assets/images/logofire1.png') }}" alt="Logo"
+                                    style="width:50%; height:auto;">
+                            </a>
+
+                            <p>
+                                Website ini dikembangkan sebagai tugas mata kuliah Computer Vision dan penerapan
+                                teknologi AI.
+                            </p>
+
+                            <ul class="social">
+                                <li>
+                                    <a class="social_3" href="https://www.instagram.com/a.zidanzaki/?hl=en">
+                                        <i class="lni lni-instagram-original"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="social_4" href="https://www.linkedin.com/in/zidan-zaki/">
+                                        <i class="lni lni-linkedin-original"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-12 order-md-3 order-lg-2">
+                        <div class="footer_link_wrapper d-flex flex-wrap">
+                            <div class="footer_link mt-45">
+                                <h4 class="footer_title">Quick Link</h4>
+                                <ul class="link">
+                                    <li><a href="#home">Home</a></li>
+                                    <li><a href="#about">About</a></li>
+                                    <li><a href="#packges">Detection</a></li>
+                                    <li><a href="#gallery">Image Detect</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <p class="text-center mt-90">
+                Website by <a href="javascript:void(0)" target="_blank">Zidan Zaki</a>
+            </p>
+
+        </div>
+    </section>
+
+    <!--====== FOOTER PART ENDS ======-->
+
+    <!--====== BACK TOP TOP PART START ======-->
+
+    <a href="#" class="back-to-top"><i class="lni lni-chevron-up"></i></a>
+
+    <!--====== BACK TOP TOP PART ENDS ======-->
+
+
+    <!--====== Jquery js ======-->
+    <script src="static/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="static/assets/js/vendor/modernizr-3.7.1.min.js"></script>
+
+    <!--====== Bootstrap js ======-->
+    <script src="static/assets/js/popper.min.js"></script>
+    <script src="static/assets/js/bootstrap.4.5.2.min.js"></script>
+
+
+    <!--====== Scrolling Nav js ======-->
+    <script src="static/assets/js/jquery.easing.min.js"></script>
+    <script src="static/assets/js/scrolling-nav.js"></script>
+
+    <!--====== Counter Up js ======-->
+    <script src="static/assets/js/waypoints.min.js"></script>
+    <script src="static/assets/js/jquery.counterup.min.js"></script>
+
+    <!--====== Nice Select js ======-->
+    <script src="static/assets/js/jquery.nice-select.min.js"></script>
+
+    <!--====== WOW js ======-->
+    <script src="static/assets/js/wow.min.js"></script>
+
+    <!--====== Main js ======-->
+    <script src="static/assets/js/main.js"></script>
+    <script>
+        const fileInput = document.getElementById('imageInput');
+        const fileLabel = document.getElementById('file-label');
+        const previewDiv = document.getElementById('preview');
+        const uploadForm = document.getElementById('upload-form');
+        const loading = document.getElementById('loading');
+
+        // preview file
+        fileInput.addEventListener('change', function () {
+            const file = this.files && this.files[0];
+            if (file) {
+                fileLabel.textContent = file.name;
+            }
+        });
+
+        // submit
+        uploadForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            loading.style.display = 'flex';
+            previewDiv.innerHTML = '';
+
+            const formData = new FormData(this);
+
+            fetch('/detect', {
+                method: 'POST',
+                body: formData
+            })
+                .then(res => res.json())
+                .then(data => {
+
+                    loading.style.display = 'none';
+
+                    if (data.error) {
+                        previewDiv.innerHTML = `<p style="color:red;">${data.error}</p>`;
+                        return;
+                    }
+
+                    previewDiv.innerHTML = `
+            <div style="background:#fff; padding:10px; border-radius:10px;">
+                <img src="${data.image_url}" style="width:100%; border-radius:8px;">
+                <div style="text-align:left; margin-top:10px; font-size:13px;">
+                    <b>HASIL DETEKSI</b><br>
+                    Objek: ${data.object_label}<br><br>
+                    <b>🔥 Fire</b><br>
+                    Luas: ${data.fire.area}px²<br>
+                    Persentase: ${data.fire.percent}%<br>
+                    Kategori: ${data.fire.category}<br><br>
+                    <b>💨 Smoke</b><br>
+                    Luas: ${data.smoke.area}px²<br>
+                    Persentase: ${data.smoke.percent}%<br>
+                    Kategori: ${data.smoke.category}
+                </div>
+            </div>
+        `;
+                })
+                .catch(err => {
+                    loading.style.display = 'none';
+                    previewDiv.innerHTML = `<p style="color:red;">Error sistem</p>`;
+                });
+        });
+    </script>
+
+</body>
+
+</html>

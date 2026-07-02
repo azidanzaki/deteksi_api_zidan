@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload Image</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body {font-family: 'Inter', sans-serif; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; background: linear-gradient(135deg, #ffefd5, #ffe4e1);}
+    h1 {margin-bottom:20px;}
+    form {background:#fff; padding:20px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+    button {margin-top:10px; padding:8px 16px; background:#ff6b6b; color:#fff; border:none; border-radius:6px; cursor:pointer;}
+    button:hover {background:#ff4757;}
+  </style>
+</head>
+<body>
+  <h1>Upload Image for Fire Detection</h1>
+  <form action="/detect" method="post" enctype="multipart/form-data">
+    <input type="file" name="image" accept="image/*" required>
+    <button type="submit">Detect</button>
+  </form>
+</body>
+</html>

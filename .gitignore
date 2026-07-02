@@ -1,0 +1,31 @@
+# Virtual Environment
+venv/
+.env/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+
+# YOLO
+runs/
+
+# Temporary
+tmp/
+
+# Detection Results
+static/results/
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Git
+*.log

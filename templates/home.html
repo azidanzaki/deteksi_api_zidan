@@ -1,0 +1,70 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Fire Detection Service</title>
+    <meta name="description" content="Fire detection web app">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/images/favicon.png') }}" type="image/png">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/animate.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/nice-select.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/LineIcons.2.0.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap.4.5.2.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/default.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
+    <!-- Custom CSS for this app -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader"><div class="loader"></div></div>
+    <!-- Header Navigation -->
+    <section class="header_area">
+        <div class="header_navbar">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg">
+                    <a class="navbar-brand" href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='assets/images/logo.svg') }}" alt="Logo"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="toggler-icon"></span><span class="toggler-icon"></span><span class="toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto" id="nav">
+                            <li class="nav-item"><a class="page-scroll" href="{{ url_for('index') }}#home">Home</a></li>
+                            <li class="nav-item"><a class="page-scroll" href="{{ url_for('upload_page') }}">Upload Image</a></li>
+                            <li class="nav-item"><a class="page-scroll" href="{{ url_for('camera_page') }}">Realtime Camera</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </section>
+    <!-- Main Content Block -->
+    {% block content %}{% endblock %}
+    <!-- Footer (optional) -->
+    <section id="footer" class="footer_area">
+        <div class="footer_widget pt-80 pb-130">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer_about mt-50">
+                            <a href="#"><img src="{{ url_for('static', filename='assets/images/logo.svg') }}" alt="logo"></a>
+                            <p>Fire detection service using YOLOv8.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- JS -->
+    <script src="{{ url_for('static', filename='assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/vendor/modernizr-3.7.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/bootstrap.4.5.2.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/jquery.easing.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/scrolling-nav.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/waypoints.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/jquery.counterup.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/wow.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+</body>
+</html>

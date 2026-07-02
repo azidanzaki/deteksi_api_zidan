@@ -1,0 +1,343 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Life Detection - TraveLand Template</title>
+    <meta name="description" content="Life detection page for fire detection model.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/images/favicon.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/animate.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/nice-select.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/LineIcons.2.0.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap.4.5.2.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/default.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
+    <style>
+        /* Navbar selalu berwarna biru */
+        .header_navbar {
+            background: #343a40 !important;
+            /* ganti jika ingin sama persis dengan footer */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        /* Saat navbar menjadi sticky tetap biru */
+        .sticky {
+            background: #343a40 !important;
+        }
+
+        /* Warna menu */
+        .header_navbar .navbar-nav .nav-item a {
+            color: #fff !important;
+        }
+
+        .header_navbar .navbar-nav .nav-item.active a,
+        .header_navbar .navbar-nav .nav-item a:hover {
+            color: #ffd54f !important;
+        }
+
+        /* Logo tetap rapi */
+        .header_navbar .navbar {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <section class="header_area">
+        <div class="header_navbar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand" href="index.html">
+                                <img src="{{ url_for('static', filename='assets/images/logofire1.png') }}" alt="Logo"
+                                    style="width:50%; height:auto;">
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                <ul id="nav" class="navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a href="/">Home</a>
+                                    </li>
+                                    <li class="nav-item active">
+                                        <a href="/camera" style="white-space:nowrap;">Life
+                                            Detection</a>
+                                    </li>
+                                </ul>
+                            </div> <!-- navbar collapse -->
+                        </nav> <!-- navbar -->
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+        </div> <!-- header navbar -->
+    </section>
+    <!-- Main Content -->
+    <section class="hero_area" style="padding: 150px 0; text-align:center;">
+        <h1>Life Detection</h1>
+        <p>Integrate your YOLOv8 fire detection model here.</p>
+        <div id="cameraContainer" style="position:relative;display:inline-block;max-width:900px;width:100%;">
+
+            <video id="video" autoplay playsinline style="width:100%;border-radius:12px;">
+            </video>
+
+            <canvas id="canvas" style="display:none;">
+            </canvas>
+
+            <img id="output" style="width:100%;display:none;border-radius:12px;">
+
+            <div id="detectInfo" style="
+            position:absolute;
+            right:15px;
+            bottom:15px;
+            background:rgba(0,0,0,.75);
+            color:white;
+            padding:12px;
+            border-radius:10px;
+            width:240px;
+            text-align:left;
+            font-size:14px;">
+
+                <b>HASIL DETEKSI</b><br>
+
+                Objek :
+                <span id="obj">-</span><br>
+
+                Luas :
+                <span id="area">0</span> px²<br>
+
+                Persentase :
+                <span id="percent">0</span>%<br>
+
+                Kategori :
+                <span id="category">-</span>
+
+            </div>
+
+        </div>
+    </section>
+    <!--====== FOOTER PART START ======-->
+    <section id="footer" class="footer_area">
+        <div class="footer_widget pt-80 pb-130">
+
+            <div class="container" style="max-width: 900px; margin: 0 auto; display: flex; justify-content: center;">
+
+                <div class="row" style="width: 100%; justify-content: center;">
+
+                    <div class="col-lg-4 col-md-6 order-md-1 order-lg-1">
+                        <div class="footer_about mt-50">
+                            <a href="#">
+                                <img src="{{ url_for('static', filename='assets/images/logofire1.png') }}" alt="Logo"
+                                    style="width:50%; height:auto;">
+                            </a>
+
+                            <p>
+                                Website ini dikembangkan sebagai tugas mata kuliah Computer Vision dan penerapan
+                                teknologi AI.
+                            </p>
+
+                            <ul class="social">
+                                <li>
+                                    <a class="social_3" href="https://www.instagram.com/a.zidanzaki/?hl=en">
+                                        <i class="lni lni-instagram-original"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="social_4" href="https://www.linkedin.com/in/zidan-zaki/">
+                                        <i class="lni lni-linkedin-original"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-12 order-md-3 order-lg-2">
+                        <div class="footer_link_wrapper d-flex flex-wrap">
+                            <div class="footer_link mt-45">
+                                <h4 class="footer_title">Quick Link</h4>
+                                <ul class="link">
+                                    <li><a href="#home">Home</a></li>
+                                    <li><a href="#about">About</a></li>
+                                    <li><a href="#packges">Detection</a></li>
+                                    <li><a href="#gallery">Image Detect</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <p class="text-center mt-90">
+                Website by <a href="javascript:void(0)" target="_blank">Zidan Zaki</a>
+            </p>
+
+        </div>
+    </section>
+    <script src="{{ url_for('static', filename='assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/vendor/modernizr-3.7.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/bootstrap.4.5.2.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/jquery.easing.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/scrolling-nav.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/waypoints.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/jquery.counterup.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/wow.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+    <script>
+        const video = document.getElementById("video");
+        const canvas = document.getElementById("canvas");
+        const output = document.getElementById("output");
+
+        const ctx = canvas.getContext("2d");
+
+        let sending = false;
+
+        // ===============================
+        // Aktifkan Kamera
+        // ===============================
+        async function startCamera() {
+
+            try {
+
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: {
+                        width: 640,
+                        height: 480,
+                        facingMode: "environment"
+                    },
+                    audio: false
+                });
+
+                video.srcObject = stream;
+
+                video.onloadedmetadata = () => {
+
+                    video.play();
+
+                    canvas.width = video.videoWidth;
+                    canvas.height = video.videoHeight;
+
+                    setInterval(sendFrame, 300);
+
+                };
+
+            } catch (err) {
+
+                alert("Tidak dapat mengakses kamera.");
+
+                console.error(err);
+
+            }
+
+        }
+
+        // ===============================
+        // Kirim Frame ke Flask
+        // ===============================
+        async function sendFrame() {
+
+            if (sending) return;
+
+            if (video.readyState !== 4) return;
+
+            sending = true;
+
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            const image = canvas.toDataURL("image/jpeg", 0.7);
+
+            try {
+
+                const response = await fetch("/detect_frame", {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        image: image
+                    })
+
+                });
+
+                const data = await response.json();
+
+                // tampilkan hasil deteksi
+
+                output.src = data.image;
+
+                output.style.display = "block";
+
+                video.style.display = "none";
+
+                // update informasi
+
+                document.getElementById("obj").innerHTML =
+                    data.result.object_label;
+
+                let area = 0;
+                let percent = 0;
+                let category = "-";
+
+                if (data.result?.fire?.area > 0) {
+
+                    area += data.result?.fire?.area;
+
+                    percent += data.result.fire.percent;
+
+                    category = data.result.fire.category;
+
+                }
+
+                if (data.result.smoke.area > 0) {
+
+                    area += data.result.smoke.area;
+
+                    percent += data.result.smoke.percent;
+
+                    category = data.result.smoke.category;
+
+                }
+
+                document.getElementById("area").innerHTML = area;
+
+                document.getElementById("percent").innerHTML =
+                    percent.toFixed(2);
+
+                document.getElementById("category").innerHTML =
+                    category;
+
+            }
+
+            catch (err) {
+
+                console.error(err);
+
+            }
+
+            sending = false;
+
+        }
+
+        // ===============================
+
+        startCamera();
+
+    </script>
+</body>
+
+</html>
